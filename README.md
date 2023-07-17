@@ -146,4 +146,4 @@ This is a REST API for Time Tracker Comparison created with:
 - **utils** - files that are used throughout the entire server folder with helper functions
 
 ## Database
-- picture of the database
+![database](./db.png)

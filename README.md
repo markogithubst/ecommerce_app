@@ -2,6 +2,10 @@
 
 [NodeJs]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
 [NodeJs-url]: https://nodejs.org/en/docs/
+[Postgres]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[Postgres-url]: https://www.postgresql.org/docs/
+[Sequelize-ORM]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white
+[Sequelize-url]: https://sequelize.org/
 [Docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
 [Docker-url]: https://docs.docker.com/
 [React]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
@@ -11,7 +15,7 @@
 [React-Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
 [React-Redux-url]: https://react-redux.js.org/introduction/getting-started
 
- [![NodeJs]][Nodejs-url] [![Docker]][Docker-url] [![React]][React-url] [![Material-UI]][Material-UI-url] [![React-Redux]][React-Redux-url]
+ [![NodeJs]][Nodejs-url] [![Postgres]][Postgres-url] [![Sequelize-ORM]][Sequelize-url] [![Docker]][Docker-url] [![React]][React-url] [![Material-UI]][Material-UI-url] [![React-Redux]][React-Redux-url]
 
 ## Table of Contents
 - [E-Commerce App](#e-commerce-app)
@@ -36,8 +40,8 @@
 This is a REST API for Time Tracker Comparison created with: 
 - **Framework Frontend** - [ReactJS](https://reactjs.org/) + [Vite](https://vitejs.dev)  
 - **Framework Backend** - [Node.js](https://nodejs.org/en/docs/)
-- **Database** -  
-- **ORM** - 
+- **Database** -- [PostgreSQL](https://www.postgresql.org/docs/) 
+- **ORM** - [Sequelize](https://sequelize.org/docs/v6/)
 - **Virtualization** - [Docker](https://docs.docker.com/)
 - **Frontend state management** - [React Redux](https://react-redux.js.org)
 - **Frontend UI library** - [Material UI](https://mui.com/)
@@ -142,4 +146,4 @@ This is a REST API for Time Tracker Comparison created with:
 - **utils** - files that are used throughout the entire server folder with helper functions
 
 ## Database
-- picture of the database
+![database](./db.png)

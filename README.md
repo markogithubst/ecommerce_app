@@ -37,7 +37,7 @@
 ### About application
 
 ### Built with
-This is a REST API for Time Tracker Comparison created with: 
+This is a REST API for E-Commerce App created with: 
 - **Framework Frontend** - [ReactJS](https://reactjs.org/) + [Vite](https://vitejs.dev)  
 - **Framework Backend** - [Node.js](https://nodejs.org/en/docs/)
 - **Database** -- [PostgreSQL](https://www.postgresql.org/docs/) 
@@ -93,7 +93,7 @@ This is a REST API for Time Tracker Comparison created with:
 3. Create a `.env` file based on `.envExample` file:
     ```
     VITE_SERVER_API_URL=http://localhost:3000
-    VITE_LOGIN_URL='http://localhost:3000/time-tracker'
+    VITE_LOGIN_URL='http://localhost:3000/ecommerce'
     ```
 4. Start the project
     ```

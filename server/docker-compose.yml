@@ -1,0 +1,39 @@
+name: ecommerce_app
+services:
+  postgres_database:
+    image: postgres:latest
+    restart: always
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 5432:${DB_PORT}
+    volumes: 
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${DB_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  ecommerce_api:
+    build: .
+    image: ecommerce_api
+    env_file: ./.env
+    ports:
+      - 3000:${PORT}
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - DB_HOST=postgres_database
+      - DB_PORT=5432
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    restart: always
+    depends_on:
+      postgres_database:
+        condition: service_healthy
+
+volumes:
+  postgres_db: {}

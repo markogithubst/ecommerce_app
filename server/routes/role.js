@@ -14,5 +14,7 @@ router.get('/:id',
   generalController.getById);
 router.put('/:id',
   generalController.update);
+router.delete('/:id',
+  generalController.softDelete);
 
 module.exports = router;

@@ -7,8 +7,19 @@ exports.ROLE_TABLE_NAME = 'role';
 exports.ROLE_MODEL_NAME = 'Role';
 exports.USER_TABLE_NAME = 'user';
 exports.USER_MODEL_NAME = 'User';
-exports.FK_USER = 'userId';
+exports.ORDER_TABLE_NAME = 'order';
+exports.ORDER_MODEL_NAME = 'Order';
+exports.ORDER_DETAILS_TABLE_NAME = 'order_details';
+exports.ORDER_DETAILS_MODEL_NAME = 'OrderDetails';
+exports.PRODUCT_TABLE_NAME = 'product';
+exports.PRODUCT_MODEL_NAME = 'Product';
+exports.CATEGORY_TABLE_NAME = 'category';
+exports.CATEGORY_MODEL_NAME = 'Category';
 exports.FK_ROLE = 'roleId';
+exports.FK_USER = 'userId';
+exports.FK_ORDER_DETAILS = 'orderDetailsId';
+exports.FK_PRODUCT = 'productId';
+exports.FK_CATEGORY = 'categoryId';
 
 // status codes
 module.exports.STATUS_CODE = {
@@ -30,6 +41,10 @@ exports.ATTRIBUTES_TO_EXCLUDE = ['password', 'createdAt', 'updatedAt', 'deletedA
 // db attributes
 exports.USER_NAME = 'name';
 exports.ROLE_NAME = 'name';
+exports.PRODUCT_NAME = 'name';
+exports.CATEGORY_NAME = 'name';
+exports.ORDER_DATE = 'orderDate';
+exports.ORDER_DETAILS_PRODUCT_QUANTITY = 'productQuantity';
 exports.EMAIL = 'email';
 exports.CREATED_AT = 'createdAt';
 exports.UPDATED_AT = 'updatedAt';

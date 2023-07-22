@@ -1,9 +1,9 @@
 const express = require('express');
-const { User } = require('../database/models');
+const { Order } = require('../database/models');
 const { generalControllers } = require('../controllers/general');
-const { FIRST_NAME } = require('../utils/constants');
+const { ORDER_DATE } = require('../utils/constants');
 
-const generalController = generalControllers(User, FIRST_NAME);
+const generalController = generalControllers(Order, ORDER_DATE);
 const router = express.Router();
 
 router.get('/',

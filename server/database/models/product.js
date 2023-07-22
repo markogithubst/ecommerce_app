@@ -4,39 +4,38 @@ const { v4: uuidv4 } = require('uuid');
 const {
   Model
 } = require('sequelize');
-const { USER_MODEL_NAME, USER_TABLE_NAME, FK_ROLE } = require('../../utils/constants');
+const { PRODUCT_MODEL_NAME, PRODUCT_TABLE_NAME, FK_CATEGORY } = require('../../utils/constants');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Product extends Model {
     static associate (models) {
-      User.belongsTo(models.Role, { foreignKey: FK_ROLE });
-      models.Role.hasMany(User, { foreignKey: FK_ROLE });
+      Product.belongsTo(models.Category, { foreignKey: FK_CATEGORY });
+      models.Category.hasMany(Product, { foreignKey: FK_CATEGORY });
     }
   }
-  User.init({
+  Product.init({
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true
     },
-    firstName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lastName: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    roleId: {
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    categoryId: {
       type: DataTypes.UUID,
       allowNull: false
     }
@@ -48,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize,
     paranoid: true,
-    modelName: USER_MODEL_NAME,
-    tableName: USER_TABLE_NAME
+    modelName: PRODUCT_MODEL_NAME,
+    tableName: PRODUCT_TABLE_NAME
   });
-  return User;
+  return Product;
 };

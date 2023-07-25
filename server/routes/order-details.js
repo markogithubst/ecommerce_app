@@ -31,5 +31,4 @@ router.delete('/:id',
   checkIdParamExists(OrderDetails),
   generalController.softDelete);
 
-
 module.exports = router;

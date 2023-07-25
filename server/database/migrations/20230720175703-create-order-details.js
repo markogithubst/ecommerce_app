@@ -19,7 +19,7 @@ module.exports = {
         references: {
           model: PRODUCT_TABLE_NAME,
           field: ID_FIELD
-      }
+        }
       },
       product_quantity: {
         type: Sequelize.INTEGER,

@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       Order.belongsTo(models.User, { foreignKey: FK_USER });
       models.User.hasMany(Order, { foreignKey: FK_USER });
-    }
-    static associate (models) {
+
       Order.belongsTo(models.OrderDetails, { foreignKey: FK_ORDER_DETAILS });
       models.OrderDetails.hasOne(Order, { foreignKey: FK_ORDER_DETAILS });
     }

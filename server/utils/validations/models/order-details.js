@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const { FK_USER, FK_ORDER_DETAILS, ORDER_DATE, FK_PRODUCT, ORDER_DETAILS_TOTAL_PRICE, ORDER_DETAILS_PRODUCT_QUANTITY } = require('../../constants');
+const { FK_PRODUCT, ORDER_DETAILS_TOTAL_PRICE, ORDER_DETAILS_PRODUCT_QUANTITY } = require('../../constants');
 const VALIDATION_MESSAGE = require('../validation-messages');
 
 module.exports.orderDetailsValidations = [
@@ -10,18 +10,18 @@ module.exports.orderDetailsValidations = [
     .withMessage(VALIDATION_MESSAGE.NOT_UUID(FK_PRODUCT)),
   body(ORDER_DETAILS_PRODUCT_QUANTITY)
     .custom((value) => {
-        const numericValue = parseFloat(value);
-        if (isNaN(numericValue) || numericValue <= 0) {
+      const numericValue = parseFloat(value);
+      if (isNaN(numericValue) || numericValue <= 0) {
         throw new Error(VALIDATION_MESSAGE.NOT_A_POSITIVE_INTEGER(ORDER_DETAILS_PRODUCT_QUANTITY));
-        }
-        return true;
+      }
+      return true;
     }),
   body(ORDER_DETAILS_TOTAL_PRICE)
     .custom((value) => {
-        const numericValue = parseFloat(value);
-        if (isNaN(numericValue) || numericValue <= 0) {
+      const numericValue = parseFloat(value);
+      if (isNaN(numericValue) || numericValue <= 0) {
         throw new Error(VALIDATION_MESSAGE.NOT_A_POSITIVE_INTEGER(ORDER_DETAILS_TOTAL_PRICE));
-        }
-        return true;
+      }
+      return true;
     })
 ];

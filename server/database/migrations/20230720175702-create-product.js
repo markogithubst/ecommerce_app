@@ -35,7 +35,7 @@ module.exports = {
         references: {
           model: CATEGORY_TABLE_NAME,
           field: ID_FIELD
-      }
+        }
       },
       created_at: {
         type: Sequelize.DATE,

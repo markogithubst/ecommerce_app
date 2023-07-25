@@ -19,15 +19,15 @@ module.exports = {
         references: {
           model: ORDER_DETAILS_TABLE_NAME,
           field: ID_FIELD
-      }
+        }
       },
       user_id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         references: {
-            model: USER_TABLE_NAME,
-            field: ID_FIELD
+          model: USER_TABLE_NAME,
+          field: ID_FIELD
         }
       },
       order_date: {

@@ -117,7 +117,7 @@ export default function PersistentDrawerLeft ({ _children }) {
             <Box sx={{ flexGrow: 1 }} />
             {[
               { text: 'Home', route: '/' },
-              { text: 'Users', route: '/users' }
+              { text: 'Order', route: '/order' }
             ].map(({ text, route }) => (
               <Link
                 to={route}
@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft ({ _children }) {
         <List>
           {[
             { text: 'Home', route: '/' },
-            { text: 'Users', route: '/users' }
+            { text: 'Order', route: '/order' }
           ].map(({ text, route }) => (
             <ListItem key={text} disablePadding>
               <Link to={route} style={{ color: '#202120' }}>

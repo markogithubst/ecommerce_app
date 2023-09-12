@@ -147,3 +147,6 @@ This is a REST API for E-Commerce App created with:
 
 ## Database
 ![database](./db.png)
+
+## Frontend
+![frontend](./frontend.png)

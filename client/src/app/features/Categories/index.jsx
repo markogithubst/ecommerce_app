@@ -120,7 +120,7 @@ const Categories = () => {
             {!isLoading && rowsOfThree.length === 0 && (
               <div>
                 <Typography variant="h5" color={'red'}>
-                  No categories found in the database, please check connection with database
+                  No categories/products found in the database, please check connection with database
                 </Typography>
               </div>
             )}

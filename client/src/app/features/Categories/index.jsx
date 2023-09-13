@@ -1,5 +1,5 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { CircularProgress, Grid, Typography, Box } from '@mui/material';
 import { useGetCategoriesListQuery } from '../../api/categoriesApiSlice';
 import { toastifyError } from '../../hooks/useToastify';
 import camerasImage from '../../images/cameras-category.jpg';
@@ -8,6 +8,7 @@ import laptopsImage from '../../images/laptops-category.jpg';
 import mobilePhoneImage from '../../images/mobile-phone-category.jpg';
 import smartwatchImage from '../../images/smartwatch-category.jpg';
 import speakerImage from '../../images/speaker-category.jpg';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Categories = () => {
   const { data: categories, error, isLoading } = useGetCategoriesListQuery();
@@ -54,6 +55,21 @@ const Categories = () => {
     setHoveredCategory(null);
   };
 
+  const createCategoryLink = (categoryName) => {
+    const categoryLink = {
+      Cameras: 'cameras',
+      'Headphones and Earphones': 'headphones-and-earphones',
+      Laptops: 'laptops',
+      'Mobile Phones': 'mobile-phones',
+      Smartwatches: 'smartwatches',
+      Speakers: 'speakers'
+    };
+
+    const categoryLinkForRoute = categoryLink[categoryName];
+
+    return `/products/${categoryLinkForRoute}`;
+  };
+
   return (
     <div
       style={{
@@ -79,38 +95,57 @@ const Categories = () => {
                   <Grid container key={rowIndex}>
                     {row.map((category, index) => (
                       <Grid item xs={4} key={index}>
-                        <Box
-                          border={0.5}
-                          borderColor={categoryBorderColor}
-                          padding="0.5rem"
-                          m={1}
-                          borderRadius='2%'
-                          backgroundColor={
-                            hoveredCategory === category.name
-                              ? hoveredBackgroundColor
-                              : oneCategoryBackgroundColor
-                          }
-                          boxShadow={
-                            hoveredCategory === category.name
-                              ? 5
-                              : 0
-                          }
-                          onMouseEnter={() => handleMouseEnter(category.name)}
-                          onMouseLeave={handleMouseLeave}
+                        <RouterLink
+                          to={createCategoryLink(category.name)} // Pass category name as a param
+                          style={{ textDecoration: 'none' }}
                         >
-                          <Typography variant="subtitle1" style={{ color: categoriesNameAndDescriptionColor, textDecoration: 'none', fontWeight: 'bold' }}>
-                            {category.name}
-                          </Typography>
-                          <img
-                            src={categoryImages[category.name] || ''}
-                            alt={category.name}
-                            width="100%"
-                            style={{ borderRadius: '8px' }}
-                          />
-                          <Typography variant="subtitle2" style={{ color: categoriesNameAndDescriptionColor, textDecoration: 'none' }}>
-                            {category.description}
-                          </Typography>
-                        </Box>
+                          <Box
+                            border={0.5}
+                            borderColor={categoryBorderColor}
+                            padding="0.5rem"
+                            m={1}
+                            borderRadius="2%"
+                            backgroundColor={
+                              hoveredCategory === category.name
+                                ? hoveredBackgroundColor
+                                : oneCategoryBackgroundColor
+                            }
+                            boxShadow={
+                              hoveredCategory === category.name ? 5 : 0
+                            }
+                            onMouseEnter={() =>
+                              handleMouseEnter(category.name)
+                            }
+                            onMouseLeave={handleMouseLeave}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            <Typography
+                              variant="subtitle1"
+                              style={{
+                                color: categoriesNameAndDescriptionColor,
+                                textDecoration: 'none',
+                                fontWeight: 'bold'
+                              }}
+                            >
+                              {category.name}
+                            </Typography>
+                            <img
+                              src={categoryImages[category.name] || ''}
+                              alt={category.name}
+                              width="100%"
+                              style={{ borderRadius: '8px' }}
+                            />
+                            <Typography
+                              variant="subtitle2"
+                              style={{
+                                color: categoriesNameAndDescriptionColor,
+                                textDecoration: 'none'
+                              }}
+                            >
+                              {category.description}
+                            </Typography>
+                          </Box>
+                        </RouterLink>
                       </Grid>
                     ))}
                   </Grid>

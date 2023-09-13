@@ -1,4 +1,4 @@
-import HomePage from '../../features/Home/HomePage';
+import HomePage from '../../features/Home';
 
 const Home = () => {
   return (

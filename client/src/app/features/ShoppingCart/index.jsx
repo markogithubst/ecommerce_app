@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Button, Grid, Modal, Typography } from '@mui/material';
 
-const ModalDeleteProject = () => {
+const ModalShoppingCart = ({ togglePropToRenderCartModal }) => {
   const [closeModal, setCloseModal] = useState(false);
   const modalBackgroundColor = '#e5ecf3';
   const updateButtonBackgroundColor = '#e76a70';
   const buyButtonBackgroundColor = '#6c9372';
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    setCloseModal(false);
+  }, [togglePropToRenderCartModal]);
 
   const handleCloseModal = () => {
     setCloseModal(true);
-    navigate('/');
-    setCloseModal(false);
   };
 
   return (
@@ -30,12 +29,13 @@ const ModalDeleteProject = () => {
           maxHeight: '95%',
           display: 'flex',
           flexDirection: 'column',
-          borderRadius: '8px'
+          borderRadius: '25px'
         }}>
         <button
           onClick={handleCloseModal}
           style={{
             position: 'absolute',
+            borderRadius: '40%',
             top: '0',
             right: '0',
             border: 'none',
@@ -59,6 +59,7 @@ const ModalDeleteProject = () => {
                 backgroundColor: buyButtonBackgroundColor,
                 color: 'black',
                 m: 1,
+                borderRadius: '20px',
                 '&:hover': {
                   backgroundColor: '#e8f1f9',
                   boxShadow: 'none'
@@ -72,6 +73,7 @@ const ModalDeleteProject = () => {
                 backgroundColor: updateButtonBackgroundColor,
                 color: 'black',
                 m: 1,
+                borderRadius: '20px',
                 '&:hover': {
                   backgroundColor: '#e8f1f9',
                   boxShadow: 'none'
@@ -84,4 +86,4 @@ const ModalDeleteProject = () => {
   );
 };
 
-export default ModalDeleteProject;
+export default ModalShoppingCart;

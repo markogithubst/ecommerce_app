@@ -15,13 +15,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Button from '@mui/material/Button';
 import Hidden from '@mui/material/Hidden';
 import Logo from '../../images/logo.png';
+import HomeIcon from '@mui/icons-material/Home';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { Link, Outlet } from 'react-router-dom';
+import ModalShoppingCart from '../../features/ShoppingCart';
 
 const drawerWidth = 200;
 
@@ -75,6 +77,8 @@ export default function PersistentDrawerLeft ({ _children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [activeButton, setActiveButton] = React.useState(window.location.pathname);
+  const [togglePropToRenderCartModal, setTogglePropToRenderCartModal] = React.useState(false);
+  const [isCartModalOpen, setCartModalOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -83,6 +87,11 @@ export default function PersistentDrawerLeft ({ _children }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleCartModal = () => {
+    setCartModalOpen(true);
+    setTogglePropToRenderCartModal((prevValue) => !prevValue);
   };
 
   return (
@@ -112,12 +121,11 @@ export default function PersistentDrawerLeft ({ _children }) {
               style={{ color: 'white' }}
               onClick={() => setActiveButton('/')}
             >
-              <img alt='Logo' src={Logo} style={{ height: '30px' }}/>
+              <img alt='Logo' src={Logo} style={{ height: '60px', margin: '4px' }}/>
             </Link>
             <Box sx={{ flexGrow: 1 }} />
             {[
-              { text: 'Home', route: '/' },
-              { text: 'Shopping Cart', route: '/order' }
+              { text: 'Home', route: '/' }
             ].map(({ text, route }) => (
               <Link
                 to={route}
@@ -126,10 +134,17 @@ export default function PersistentDrawerLeft ({ _children }) {
                 onClick={() => setActiveButton(route)}
               >
                 <Button color="inherit" style={{ border: activeButton === route ? '1px solid #4A4D59' : 'none' }}>
-                  {text}
+                  <HomeIcon />
                 </Button>
               </Link>
             ))}
+            <Button
+              color="inherit"
+              style={{ color: '#4A4D59', textDecoration: 'none', marginLeft: '1rem' }}
+              onClick={handleCartModal}
+            >
+              <ShoppingCartIcon />
+            </Button>
 
             {[{ text: 'Logout', route: '/logout' }].map(({ text, route }) => (
               <Link
@@ -138,7 +153,9 @@ export default function PersistentDrawerLeft ({ _children }) {
                 key={text}
                 onClick={() => setActiveButton(route)}
               >
-                <Button color="inherit" style={{ border: activeButton === route ? '1px solid #4A4D59' : 'none' }}>{text}</Button>
+                <Button color="inherit" style={{ border: activeButton === route ? '1px solid #4A4D59' : 'none' }}>
+                  <LogoutIcon />
+                </Button>
               </Link>
             ))}
           </Toolbar>
@@ -165,20 +182,29 @@ export default function PersistentDrawerLeft ({ _children }) {
         <Divider />
         <List>
           {[
-            { text: 'Home', route: '/' },
-            { text: 'Shopping Cart', route: '/order' }
+            { text: 'Home', route: '/' }
           ].map(({ text, route }) => (
             <ListItem key={text} disablePadding>
               <Link to={route} style={{ color: '#202120' }}>
                 <ListItemButton>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <HomeIcon />
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
               </Link>
             </ListItem>
           ))}
+          <Link onClick={handleCartModal} style={{ color: '#202120' }}>
+            <ListItem key={'Cart'} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Cart'} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>
@@ -199,6 +225,13 @@ export default function PersistentDrawerLeft ({ _children }) {
       <Main open={open}>
         <Outlet />
       </Main>
+
+      {isCartModalOpen &&
+      <ModalShoppingCart
+        isOpen={isCartModalOpen}
+        onClose={() => setCartModalOpen(false)}
+        togglePropToRenderCartModal={togglePropToRenderCartModal}
+      />}
     </Box>
   );
 }

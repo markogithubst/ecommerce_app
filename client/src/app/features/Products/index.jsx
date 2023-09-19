@@ -1,20 +1,27 @@
 import { Box, CircularProgress, Grid, Typography, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useGetProductsListQuery } from '../../api/productsApiSlice';
 import { toastifyError } from '../../hooks/useToastify';
-import action4KImage from '../../images/ActionX-4K.jpg';
-import compactViewImage from '../../images/CompactView-V20.jpg';
-import mirrorMaxImage from '../../images/MirrorMax-Z7.jpg';
-import proCaptureImage from '../../images/ProCapture-2000.jpg';
+import productImages from '../../utils/productImages';
+import ModalShoppingCart from '../ShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Products = () => {
   const { data: products, error, isLoading } = useGetProductsListQuery();
   const [productsList, setProductsList] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
+  const [isCartModalOpen, setCartModalOpen] = useState(false);
+  const [togglePropToRenderCartModal, setTogglePropToRenderCartModal] = useState(false);
   const allProductBackgroundColor = '#f1f5f9';
   const productBorderColor = '#7fa2c4';
   const oneProductBackgroundColor = '#dae4ee';
-  const buyButtonBackgroundColor = '#6c9372';
+  const buyButtonBackgroundColor = '#92af97';
+  const categoriesNameAndDescriptionColor = '#4A4D59';
+  const backButtonBackgroundColor = '#f1dfcd';
+  const cartButtonBackgroundColor = '#afc4b2';
+  const productNameAndDescriptionColor = '#4A4D59';
 
   const createProductCategory = () => {
     const productRouteName = window.location.pathname;
@@ -51,11 +58,9 @@ const Products = () => {
 
   const rowsOfThree = chunkArray(filteredProducts, 3);
 
-  const cameraImages = {
-    'ActionX 4K': action4KImage,
-    'CompactView V20': compactViewImage,
-    'MirrorMax Z7': mirrorMaxImage,
-    'ProCapture 2000': proCaptureImage
+  const handleCartModal = () => {
+    setCartModalOpen(true);
+    setTogglePropToRenderCartModal((prevValue) => !prevValue);
   };
 
   return (
@@ -65,7 +70,7 @@ const Products = () => {
           backgroundColor: allProductBackgroundColor,
           padding: '1rem',
           width: '100%',
-          borderRadius: '8px'
+          borderRadius: '30px'
         }}
       >
         {isLoading && <CircularProgress />}
@@ -78,7 +83,48 @@ const Products = () => {
             pt={1}
           >
             <Grid item xs={12}>
-
+              <Grid container>
+                <Grid item xs={10}>
+                  <Typography
+                    variant="h4"
+                    pb={2}
+                    style={{ color: categoriesNameAndDescriptionColor, textDecoration: 'none' }}>
+                    {categoryName}
+                  </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                  <Button
+                    onClick={handleCartModal}
+                    sx={{
+                      backgroundColor: cartButtonBackgroundColor,
+                      color: 'black',
+                      m: 1,
+                      borderRadius: '20px',
+                      '&:hover': {
+                        backgroundColor: '#e8f1f9',
+                        boxShadow: 'none'
+                      }
+                    }}><ShoppingCartIcon /></Button>
+                </Grid>
+                <Grid item xs={1}>
+                  <RouterLink
+                    to={'/home'}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <Button
+                      sx={{
+                        backgroundColor: backButtonBackgroundColor,
+                        color: 'black',
+                        m: 1,
+                        borderRadius: '20px',
+                        '&:hover': {
+                          backgroundColor: '#e8f1f9',
+                          boxShadow: 'none'
+                        }
+                      }}><ArrowBackIcon /></Button>
+                  </RouterLink>
+                </Grid>
+              </Grid>
               {rowsOfThree.length > 0 && (
                 <div>
                   {rowsOfThree.map((row, rowIndex) => (
@@ -90,14 +136,14 @@ const Products = () => {
                             borderColor={productBorderColor}
                             padding="0.5rem"
                             m={1}
-                            borderRadius="2%"
+                            borderRadius="20px"
                             backgroundColor={oneProductBackgroundColor}
                             style={{ cursor: 'pointer' }}
                           >
                             <Typography
                               variant="subtitle1"
                               style={{
-                                color: 'black',
+                                color: productNameAndDescriptionColor,
                                 textDecoration: 'none',
                                 fontWeight: 'bold'
                               }}
@@ -105,15 +151,15 @@ const Products = () => {
                               {product.name}
                             </Typography>
                             <img
-                              src={cameraImages[product.name] || ''}
+                              src={productImages[product.name] || ''}
                               alt={product.name}
                               width="100%"
-                              style={{ borderRadius: '8px' }}
+                              style={{ borderRadius: '20px' }}
                             />
                             <Typography
-                              variant="subtitle1"
+                              variant="subtitle2"
                               style={{
-                                color: '#4A4D59',
+                                color: productNameAndDescriptionColor,
                                 textDecoration: 'none'
                               }}>
                               {product.description}
@@ -147,6 +193,7 @@ const Products = () => {
                                 backgroundColor: buyButtonBackgroundColor,
                                 color: 'black',
                                 m: 1,
+                                borderRadius: '20px',
                                 '&:hover': {
                                   backgroundColor: '#e8f1f9',
                                   boxShadow: 'none'
@@ -161,7 +208,7 @@ const Products = () => {
               )}
               {(!isLoading && productsList.length === 0) && (
                 <div>
-                  <Typography variant="h5" color={'red'}>
+                  <Typography variant="h5" color={'black'}>
                     No products found in the database
                   </Typography>
                 </div>
@@ -169,6 +216,12 @@ const Products = () => {
             </Grid>
           </Grid>
         </Box>
+        {isCartModalOpen &&
+      <ModalShoppingCart
+        isOpen={isCartModalOpen}
+        onClose={() => setCartModalOpen(false)}
+        togglePropToRenderCartModal={togglePropToRenderCartModal}
+      />}
       </div>
     </Box>
   );

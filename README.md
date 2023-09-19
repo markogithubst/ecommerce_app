@@ -146,7 +146,26 @@ This is a REST API for E-Commerce App created with:
 - **utils** - files that are used throughout the entire server folder with helper functions
 
 ## Database
-![database](./db.png)
+![database](./readme-images/db.png)
 
-## Frontend
-![frontend](./frontend.png)
+## Frontend homepage:
+![frontend-home](./readme-images/frontend-home.png)
+
+## Frontend product pages:
+####  Cameras section
+![cameras-section](./readme-images/cameras-section.png)
+
+####  Headphones and Earphones section
+![headphones-and-earphones-section](./readme-images/headphones-and-earphones-section.png)
+
+####  Laptops section
+![laptops-section](./readme-images/laptops-section.png)
+
+#### Mobile Phones section
+![mobile-phones-section](./readme-images/mobile-phones-section.png)
+
+####  Smartwatches section
+![smartwatches-section](./readme-images/smartwatches-section.png)
+
+####  Speakers section
+![speakers-section](./readme-images/speakers-section.png)

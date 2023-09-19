@@ -2,13 +2,8 @@ import { useEffect, useState } from 'react';
 import { CircularProgress, Grid, Typography, Box } from '@mui/material';
 import { useGetCategoriesListQuery } from '../../api/categoriesApiSlice';
 import { toastifyError } from '../../hooks/useToastify';
-import camerasImage from '../../images/cameras-category.jpg';
-import headphoneEarphoneImage from '../../images/headphone-earphone-category.jpg';
-import laptopsImage from '../../images/laptops-category.jpg';
-import mobilePhoneImage from '../../images/mobile-phone-category.jpg';
-import smartwatchImage from '../../images/smartwatch-category.jpg';
-import speakerImage from '../../images/speaker-category.jpg';
 import { Link as RouterLink } from 'react-router-dom';
+import categoryImages from '../../utils/categoryImages';
 
 const Categories = () => {
   const { data: categories, error, isLoading } = useGetCategoriesListQuery();
@@ -38,15 +33,6 @@ const Categories = () => {
 
   const rowsOfThree = chunkArray(categoriesList, 3);
 
-  const categoryImages = {
-    Cameras: camerasImage,
-    'Headphones and Earphones': headphoneEarphoneImage,
-    Laptops: laptopsImage,
-    'Mobile Phones': mobilePhoneImage,
-    Smartwatches: smartwatchImage,
-    Speakers: speakerImage
-  };
-
   const handleMouseEnter = (categoryName) => {
     setHoveredCategory(categoryName);
   };
@@ -73,10 +59,11 @@ const Categories = () => {
   return (
     <div
       style={{
+        marginTop: '15px',
         backgroundColor: allCategoriesBackgroundColor,
         padding: '1rem',
         width: '100%',
-        borderRadius: '8px'
+        borderRadius: '20px'
       }}
     >
       {isLoading && <CircularProgress />}
@@ -89,6 +76,12 @@ const Categories = () => {
           pt={1}
         >
           <Grid item xs={12}>
+            <Typography
+              variant="h4"
+              pb={2}
+              style={{ color: categoriesNameAndDescriptionColor, textDecoration: 'none' }}>
+              Shopping Categories
+            </Typography>
             {rowsOfThree.length > 0 && (
               <div>
                 {rowsOfThree.map((row, rowIndex) => (
@@ -104,7 +97,7 @@ const Categories = () => {
                             borderColor={categoryBorderColor}
                             padding="0.5rem"
                             m={1}
-                            borderRadius="2%"
+                            borderRadius="20px"
                             backgroundColor={
                               hoveredCategory === category.name
                                 ? hoveredBackgroundColor
@@ -133,7 +126,7 @@ const Categories = () => {
                               src={categoryImages[category.name] || ''}
                               alt={category.name}
                               width="100%"
-                              style={{ borderRadius: '8px' }}
+                              style={{ borderRadius: '20px' }}
                             />
                             <Typography
                               variant="subtitle2"
@@ -152,9 +145,9 @@ const Categories = () => {
                 ))}
               </div>
             )}
-            {!isLoading && rowsOfThree.length === 0 && (
+            {!isLoading && categoriesList.length === 0 && (
               <div>
-                <Typography variant="h5" color={'red'}>
+                <Typography variant="h5" color={'black'}>
                   No categories/products found in the database, please check connection with database
                 </Typography>
               </div>

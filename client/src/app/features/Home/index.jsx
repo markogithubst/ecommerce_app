@@ -1,9 +1,7 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Categories from '../Categories';
 
 const HomePage = () => {
-  const categoriesNameAndDescriptionColor = '#4A4D59';
-
   return (
     <div>
       <Box sx={{ display: 'flex', p: 3 }}>
@@ -14,12 +12,6 @@ const HomePage = () => {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <Typography
-              variant="h4"
-              pb={2}
-              style={{ color: categoriesNameAndDescriptionColor, textDecoration: 'none' }}>
-              SHOPPING CATEGORIES
-            </Typography>
             < Categories />
           </Grid>
         </Grid>

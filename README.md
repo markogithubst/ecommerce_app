@@ -169,3 +169,6 @@ This is a REST API for E-Commerce App created with:
 
 ####  Speakers section
 ![speakers-section](./readme-images/speakers-section.png)
+
+####  Shopping cart modal
+![shopping-cart](./readme-images/shopping-cart.png)

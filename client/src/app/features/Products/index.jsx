@@ -1,8 +1,10 @@
 import { Box, CircularProgress, Grid, Typography, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useGetProductsListQuery } from '../../api/productsApiSlice';
-import { toastifyError } from '../../hooks/useToastify';
+import { addToShoppingCart } from '../../api/shoppingCartApiSlice';
+import { toastifyError, toastifySuccess } from '../../hooks/useToastify';
 import productImages from '../../utils/productImages';
 import ModalShoppingCart from '../ShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -14,12 +16,14 @@ const Products = () => {
   const [categoryName, setCategoryName] = useState([]);
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const [togglePropToRenderCartModal, setTogglePropToRenderCartModal] = useState(false);
+  const dispatch = useDispatch();
+
   const allProductBackgroundColor = '#f1f5f9';
   const productBorderColor = '#7fa2c4';
   const oneProductBackgroundColor = '#dae4ee';
-  const buyButtonBackgroundColor = '#92af97';
+  const buyButtonBackgroundColor = '#afc4b2';
   const categoriesNameAndDescriptionColor = '#4A4D59';
-  const backButtonBackgroundColor = '#f1dfcd';
+  const backButtonBackgroundColor = '#DDC9B5';
   const cartButtonBackgroundColor = '#afc4b2';
   const productNameAndDescriptionColor = '#4A4D59';
 
@@ -61,6 +65,11 @@ const Products = () => {
   const handleCartModal = () => {
     setCartModalOpen(true);
     setTogglePropToRenderCartModal((prevValue) => !prevValue);
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(addToShoppingCart(product));
+    toastifySuccess('Added to Shopping Cart');
   };
 
   return (
@@ -184,11 +193,12 @@ const Products = () => {
                                     textDecoration: 'none'
                                   }}
                                 >
-                              Price: {product.price}
+                              Price: {product.price}$
                                 </Typography>
                               </Grid>
                             </Grid>
                             <Button
+                              onClick={() => handleAddToCart(product)}
                               sx={{
                                 backgroundColor: buyButtonBackgroundColor,
                                 color: 'black',
